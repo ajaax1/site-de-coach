@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { useState } from 'react';
+import 'tailwindcss/tailwind.css';
 
-function App() {
+const App = () => {
+  const [result, setRandom] = useState();
+  const getApi = async () => {
+    const api = await fetch('https://api.adviceslip.com/advice');
+    const obj = await api.json();
+    setRandom(obj.slip.advice);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='title'>
+        <h1 className='text-white text-2xl italic'>
+          {result}
+        </h1>
+      </div>
+      <div className='person'>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={getApi}>click for advice</button>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
