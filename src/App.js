@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import 'tailwindcss/tailwind.css';
 
@@ -9,6 +9,12 @@ const App = () => {
     const obj = await api.json();
     setRandom(obj.slip.advice);
   }
+
+  useEffect(function(){
+    getApi()
+  });
+    
+
 
   return (
     <div className="App">
